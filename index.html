@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>স্মার্ট মেস ম্যানেজমেন্ট সিস্টেম</title>
+  <title>Smart Mess Management System</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -12,21 +12,15 @@
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen pb-24">
 
-  <!-- ==================== AUTH SCREEN (LOGIN / SIGNUP) ==================== -->
+  <!-- ==================== AUTHENTICATION SCREEN ==================== -->
   <div id="authScreen" class="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 md:p-8 border border-slate-100">
       <div class="text-center mb-6">
         <div class="w-14 h-14 bg-emerald-600 text-white rounded-2xl mx-auto flex items-center justify-center text-2xl shadow-lg shadow-emerald-600/30 mb-3">
           <i class="fa-solid fa-utensils"></i>
         </div>
-        <h1 class="text-2xl font-black text-slate-800">স্মার্ট মেস অ্যাকাউন্ট</h1>
-        <p class="text-xs text-slate-500 mt-1">লগইন বা নতুন অ্যাকাউন্ট খুলুন</p>
-      </div>
-
-      <!-- Auth Switcher -->
-      <div class="flex bg-slate-100 p-1 rounded-xl mb-5 text-xs font-bold">
-        <button onclick="toggleAuthMode('login')" id="btnAuthLogin" class="w-1/2 py-2.5 rounded-lg bg-white shadow-sm text-emerald-700">লগইন</button>
-        <button onclick="toggleAuthMode('register')" id="btnAuthRegister" class="w-1/2 py-2.5 rounded-lg text-slate-500">রেজিস্ট্রেশন</button>
+        <h1 id="authMessTitle" class="text-2xl font-black text-slate-800">স্মার্ট মেস লগইন</h1>
+        <p class="text-xs text-slate-500 mt-1">আপনার মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে প্রবেশ করুন</p>
       </div>
 
       <!-- Login Form -->
@@ -38,44 +32,25 @@
             <input type="tel" id="loginPhone" placeholder="017xxxxxxxx" class="w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 font-medium" required />
           </div>
         </div>
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1.5">পাসওয়ার্ড</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-400"></i>
+            <input type="password" id="loginPassword" placeholder="••••••••" class="w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 font-medium" required />
+          </div>
+        </div>
         <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 text-sm transition">
           প্রবেশ করুন
         </button>
       </form>
 
-      <!-- Register Form -->
-      <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-3 text-xs hidden">
-        <div>
-          <label class="block font-semibold text-slate-600 mb-1">আপনার পূর্ণ নাম</label>
-          <input type="text" id="regName" placeholder="যেমন: Sabbir" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 font-medium" required />
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-600 mb-1">মোবাইল নম্বর</label>
-          <input type="tel" id="regPhone" placeholder="017xxxxxxxx" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 font-medium" required />
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-600 mb-1">অ্যাকাউন্টের ধরন</label>
-          <select id="regRole" onchange="toggleMessNameField(this.value)" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium">
-            <option value="member">মেম্বার (সাধারণ সদস্য)</option>
-            <option value="admin">অ্যাডমিন (মেস প্রতিষ্ঠাতা)</option>
-          </select>
-        </div>
-        <div id="messNameBox" class="hidden">
-          <label class="block font-semibold text-slate-600 mb-1">মেসের নাম নির্ধারণ করুন</label>
-          <input type="text" id="regMessName" placeholder="যেমন: ধানমন্ডি ড্রিম মেস" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 font-medium" />
-        </div>
-        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 text-sm transition mt-2">
-          অ্যাকাউন্ট তৈরি করুন
-        </button>
-      </form>
-
-      <!-- Demo Account Fast Picker -->
-      <div class="mt-5 pt-4 border-t border-slate-100 text-center">
-        <span class="text-[11px] text-slate-400 font-semibold block mb-2">অথবা ডেমো অ্যাকাউন্ট দিয়ে সরাসরি টেস্ট করুন:</span>
-        <div class="flex justify-center gap-2">
-          <button onclick="quickLogin('01700000001')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-[11px] font-bold">👑 Admin</button>
-          <button onclick="quickLogin('01700000002')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 rounded-lg text-[11px] font-bold">💼 Manager</button>
-          <button onclick="quickLogin('01700000003')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-purple-50 hover:text-purple-700 rounded-lg text-[11px] font-bold">👤 Member</button>
+      <!-- Fast Demo Switcher -->
+      <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+        <span class="text-[11px] text-slate-400 font-semibold block mb-2">ডেমো অ্যাকাউন্ট দিয়ে সরাসরি টেস্ট করুন:</span>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button onclick="quickLogin('01700000001', '123')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg text-[11px] font-bold">👑 Admin (Sabbir)</button>
+          <button onclick="quickLogin('01700000002', '123')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 rounded-lg text-[11px] font-bold">💼 Manager (Shakil-2)</button>
+          <button onclick="quickLogin('01700000007', '123')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-purple-50 hover:text-purple-700 rounded-lg text-[11px] font-bold">👤 Member (Nahid)</button>
         </div>
       </div>
     </div>
@@ -84,7 +59,7 @@
   <!-- ==================== MAIN APPLICATION ==================== -->
   <div id="appContainer">
 
-    <!-- Sticky Top Header -->
+    <!-- Sticky Header -->
     <header class="sticky top-0 z-40 bg-emerald-700 text-white shadow-md">
       <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center space-x-2">
@@ -95,12 +70,13 @@
           </div>
         </div>
 
-        <div class="flex items-center space-x-3">
-          <div class="text-right hidden sm:block">
-            <p id="topUserName" class="text-xs font-bold leading-tight">User Name</p>
-            <p id="topUserPhone" class="text-[10px] text-emerald-200">017xxxxxxxx</p>
-          </div>
-          <button onclick="handleLogout()" title="লগআউট" class="w-8 h-8 rounded-full bg-emerald-800 hover:bg-rose-600 flex items-center justify-center text-xs text-white transition">
+        <div class="flex items-center space-x-2">
+          <!-- Profile Edit Modal Opener -->
+          <button onclick="openProfileModal()" class="flex items-center space-x-1.5 bg-emerald-800 hover:bg-emerald-900 px-2.5 py-1.5 rounded-xl border border-emerald-600 text-xs transition">
+            <i class="fa-solid fa-user-pen text-emerald-300"></i>
+            <span id="topUserName" class="font-bold">User</span>
+          </button>
+          <button onclick="handleLogout()" title="লগআউট" class="w-8 h-8 rounded-xl bg-emerald-800 hover:bg-rose-600 flex items-center justify-center text-xs text-white transition">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
         </div>
@@ -108,19 +84,25 @@
 
       <!-- Navigation Tabs -->
       <nav class="flex justify-around bg-emerald-800 text-xs font-semibold border-t border-emerald-600/70 overflow-x-auto">
-        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="py-2.5 px-3 min-w-[90px] text-center border-b-2 border-white font-bold bg-emerald-900/50">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="py-2.5 px-3 min-w-[85px] text-center border-b-2 border-white font-bold bg-emerald-900/50">
           <i class="fa-solid fa-house block text-sm mb-0.5"></i> ড্যাশবোর্ড
         </button>
-        <button onclick="switchTab('active-meals')" id="nav-active-meals" class="py-2.5 px-3 min-w-[90px] text-center text-emerald-200 hover:text-white">
+        <button onclick="switchTab('active-meals')" id="nav-active-meals" class="py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white">
           <i class="fa-solid fa-users-viewfinder block text-sm mb-0.5"></i> আজকের মিল
         </button>
-        <button onclick="switchTab('bazar-entry')" id="nav-bazar-entry" class="py-2.5 px-3 min-w-[90px] text-center text-emerald-200 hover:text-white">
+        <button onclick="switchTab('meal-calendar')" id="nav-meal-calendar" class="py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white">
+          <i class="fa-solid fa-calendar-days block text-sm mb-0.5"></i> তারিখভিত্তিক
+        </button>
+        <button onclick="switchTab('bazar-entry')" id="nav-bazar-entry" class="py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white">
           <i class="fa-solid fa-receipt block text-sm mb-0.5"></i> বাজার জমা
         </button>
-        <button onclick="switchTab('manager-panel')" id="nav-manager-panel" class="py-2.5 px-3 min-w-[90px] text-center text-emerald-200 hover:text-white hidden">
+        <button onclick="switchTab('history-view')" id="nav-history-view" class="py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white">
+          <i class="fa-solid fa-clock-rotate-left block text-sm mb-0.5"></i> বিগত মাস
+        </button>
+        <button onclick="switchTab('manager-panel')" id="nav-manager-panel" class="py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white hidden">
           <i class="fa-solid fa-shield-halved block text-sm mb-0.5"></i> ম্যানেজার
         </button>
-        <button onclick="switchTab('admin-panel')" id="nav-admin-panel" class="py-2.5 px-3 min-w-[90px] text-center text-emerald-200 hover:text-white hidden">
+        <button onclick="switchTab('admin-panel')" id="nav-admin-panel" class="py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white hidden">
           <i class="fa-solid fa-crown block text-sm mb-0.5"></i> অ্যাডমিন
         </button>
       </nav>
@@ -138,13 +120,32 @@
       <!-- ==================== 1. MEMBER DASHBOARD ==================== -->
       <section id="view-dashboard" class="space-y-6">
 
-        <!-- Manager Transfer Notification Banner -->
+        <!-- Top Live Meal Count Banner for Khala -->
+        <div class="bg-gradient-to-r from-emerald-800 to-teal-800 text-white p-4 rounded-2xl shadow flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 bg-white/10 rounded-xl flex items-center justify-center text-2xl text-emerald-300">
+              <i class="fa-solid fa-fire-burner"></i>
+            </div>
+            <div>
+              <span class="text-xs text-emerald-200 font-semibold block">খালাকে জানানোর জন্য আজকের মোট রান্না:</span>
+              <p class="text-sm font-bold text-white mt-0.5" id="bannerKhalaMealSummary">
+                সকালে: <span class="text-amber-300 font-black text-base" id="bannerTotalBf">০</span> টি | 
+                রাতে: <span class="text-cyan-300 font-black text-base" id="bannerTotalDin">০</span> টি
+              </p>
+            </div>
+          </div>
+          <span class="text-[11px] bg-emerald-900/80 border border-emerald-500/30 px-3 py-1.5 rounded-xl font-medium text-emerald-100">
+            📅 আজকের তারিখ: <strong id="topTodayDateText">...</strong>
+          </span>
+        </div>
+
+        <!-- Manager Transfer Request Notification Banner -->
         <div id="managerRequestBanner" class="hidden bg-gradient-to-r from-amber-500 to-orange-500 text-white p-4 rounded-2xl shadow-md flex items-center justify-between">
           <div class="flex items-center space-x-3">
             <i class="fa-solid fa-bell text-2xl"></i>
             <div>
               <p class="font-bold text-sm">ম্যানেজারি অফার এসেছে!</p>
-              <p class="text-xs text-amber-100">অ্যাডমিন আপনাকে পরবর্তী মেস ম্যানেজার করার প্রস্তাব পাঠিয়েছেন।</p>
+              <p class="text-xs text-amber-100">অ্যাডমিন আপনাকে নতুন মেস ম্যানেজার করার প্রস্তাব পাঠিয়েছেন।</p>
             </div>
           </div>
           <div class="flex space-x-2">
@@ -169,36 +170,43 @@
 
           <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm">
             <span class="text-xs text-slate-500 font-semibold block">আপনার মোট মিল</span>
-            <p id="userTotalMealsCount" class="text-2xl font-black text-blue-600 mt-1">০</p>
+            <p id="userTotalMealsCount" class="text-2xl font-black text-blue-600 mt-1">০ মিল</p>
             <span id="statTotalMessMeals" class="text-[11px] text-slate-400">মেস মোট: ০ মিল</span>
           </div>
 
           <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm">
             <span class="text-xs text-slate-500 font-semibold block">আপনার মোট জমা</span>
             <p id="userTotalDepositText" class="text-2xl font-black text-emerald-600 mt-1">০ ৳</p>
-            <span class="text-[11px] text-slate-400">ম্যানেজার অনুমোদিত</span>
+            <span id="userOpeningDueText" class="text-[11px] text-slate-400">পূর্বের বকেয়া: ০ ৳</span>
           </div>
         </div>
 
-        <!-- Meal Controller (Multiple Meals + Lock Support) -->
+        <!-- Meal Controller -->
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 border-b border-slate-100 pb-3 gap-2">
             <div>
               <h3 class="font-bold text-slate-800 text-sm md:text-base flex items-center space-x-2">
-                <i class="fa-solid fa-circle-check text-emerald-600"></i>
-                <span>আজকের মিল সংখ্যা নির্ধারণ</span>
+                <i class="fa-solid fa-calendar-check text-emerald-600"></i>
+                <span>আজকের মিল চালু / বন্ধ ও সংখ্যা</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">প্রয়োজনে নিজের বা মেহমানের জন্য একাধিক মিল চালু করতে পারেন</p>
+              <p class="text-xs text-slate-400 mt-0.5">
+                কালকে সকালে স্বয়ংক্রিয়ভাবে মিল চালু থাকবে (প্রয়োজনে পরিবর্তন বা একাধিক মিল দিন)
+              </p>
             </div>
-            <span id="badgeLockStatus" class="text-xs px-2.5 py-1 rounded-full font-bold flex items-center bg-emerald-100 text-emerald-700">
-              <i class="fa-solid fa-lock-open mr-1"></i> আনলকড
-            </span>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1 rounded-lg border">
+                <i class="fa-regular fa-calendar mr-1"></i> <span id="mealControlDateText">আজ</span>
+              </span>
+              <span id="badgeLockStatus" class="text-xs px-2.5 py-1 rounded-full font-bold flex items-center bg-emerald-100 text-emerald-700">
+                <i class="fa-solid fa-lock-open mr-1"></i> আনলকড
+              </span>
+            </div>
           </div>
 
-          <!-- Manager Block Warning -->
+          <!-- Manager Forced Block Warning -->
           <div id="managerForcedOffAlert" class="hidden mb-4 p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold flex items-center space-x-2">
             <i class="fa-solid fa-ban text-rose-500 text-base"></i>
-            <span>ম্যানেজার আপনার মিল বন্ধ করে রেখেছেন। আপনি নিজে থেকে এখন মিল চালু করতে পারবেন না।</span>
+            <span>ম্যানেজার আপনার মিল বন্ধ ও লক করে রেখেছেন। আপনি নিজে থেকে এখন মিল চালু করতে পারবেন না।</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -238,7 +246,6 @@
               <span>খালাকে হিসাব বুঝিয়ে দিয়ে মিল লক করুন</span>
             </button>
 
-            <!-- Optional Cooking Item Editor Modal Opener -->
             <button onclick="openMenuModal()" class="w-full sm:w-auto px-4 py-2.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs rounded-xl transition flex items-center justify-center space-x-1.5">
               <i class="fa-solid fa-pen-to-square"></i>
               <span>আজকের রান্নার মেন্যু লিখুন (ঐচ্ছিক)</span>
@@ -258,37 +265,52 @@
           </div>
         </div>
 
-        <!-- All Members' Live Balance Sheet -->
+        <!-- Live Meal A/C Sheet (Exact Replica of your Excel Table) -->
         <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
           <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
             <div>
-              <h3 class="font-bold text-xs md:text-sm text-slate-800">সকল মেম্বারের লাইভ হিসাব বিবরণী</h3>
-              <p class="text-[10px] text-slate-400">কার কত মিল, জমা ও কত টাকা পাওনা/দেনা</p>
+              <h3 class="font-bold text-xs md:text-sm text-slate-800">Meal A/C Sheet (চলতি মাস)</h3>
+              <p class="text-[10px] text-slate-400">সকল মেম্বারের লাইভ হিসাব বিবরণী ও বকেয়া/অগ্রিম</p>
             </div>
-            <span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full font-bold">লাইভ ভিউ</span>
+            <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">লাইভ ভিউ</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-xs text-left">
-              <thead class="bg-slate-100/70 text-slate-600 font-semibold border-b">
+              <thead class="bg-slate-100/80 text-slate-700 font-bold border-b">
                 <tr>
-                  <th class="p-3.5">নাম ও নম্বর</th>
-                  <th class="p-3.5">মোট মিল</th>
-                  <th class="p-3.5">মোট জমা (৳)</th>
-                  <th class="p-3.5">মিল খরচ (৳)</th>
-                  <th class="p-3.5">বর্তমান ব্যালেন্স (+/-)</th>
+                  <th class="p-3">Name</th>
+                  <th class="p-3 text-center">Total Meal</th>
+                  <th class="p-3 text-right">Meal Rate</th>
+                  <th class="p-3 text-right">Meal Cost</th>
+                  <th class="p-3 text-right">Others</th>
+                  <th class="p-3 text-right">Total Cost</th>
+                  <th class="p-3 text-right">Deposit</th>
+                  <th class="p-3 text-right">Due / Advance</th>
                 </tr>
               </thead>
               <tbody id="tableAllMembersLive" class="divide-y divide-slate-100">
                 <!-- Populated by JS -->
               </tbody>
+              <tfoot class="bg-slate-50 font-black border-t-2">
+                <tr>
+                  <td class="p-3">Total =</td>
+                  <td class="p-3 text-center" id="footTotalMeals">0</td>
+                  <td class="p-3 text-right">-</td>
+                  <td class="p-3 text-right" id="footTotalMealCost">0.00</td>
+                  <td class="p-3 text-right" id="footTotalOthers">0.00</td>
+                  <td class="p-3 text-right" id="footTotalCost">0.00</td>
+                  <td class="p-3 text-right" id="footTotalDeposit">0.00</td>
+                  <td class="p-3 text-right font-black" id="footTotalDue">0.00</td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>
 
       </section>
 
-      <!-- ==================== 2. ACTIVE MEALS VIEW ==================== -->
+      <!-- ==================== 2. ACTIVE MEALS TODAY ==================== -->
       <section id="view-active-meals" class="space-y-6 hidden">
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
           <div class="flex items-center justify-between mb-4 border-b pb-3">
@@ -305,14 +327,51 @@
             </div>
           </div>
 
-          <!-- Active Members Grid -->
           <div id="activeMembersGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             <!-- Rendered by JS -->
           </div>
         </div>
       </section>
 
-      <!-- ==================== 3. BAZAR ENTRY WITH TWO-COLUMNS ==================== -->
+      <!-- ==================== 3. DATEWISE MEAL CALENDAR ==================== -->
+      <section id="view-meal-calendar" class="space-y-6 hidden">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 border-b pb-3 gap-3">
+            <div>
+              <h3 class="font-bold text-slate-800 text-sm md:text-base flex items-center space-x-2">
+                <i class="fa-solid fa-calendar-days text-indigo-600"></i>
+                <span>তারিখ অনুযায়ী মিলের লগ ও ইতিহাস</span>
+              </h3>
+              <p class="text-xs text-slate-400">যে কোনো নির্দিষ্ট তারিখে কে সকালে/রাতে মিল খেয়েছে তা দেখুন</p>
+            </div>
+
+            <!-- Date Selector -->
+            <div class="flex items-center space-x-2">
+              <label class="text-xs font-bold text-slate-600">তারিখ নির্বাচন:</label>
+              <input type="date" id="calendarDateFilter" onchange="renderCalendarView(this.value)" class="p-2 border rounded-xl bg-slate-50 text-xs font-bold focus:ring-2 focus:ring-emerald-500" />
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-100 text-slate-600 font-bold border-b">
+                <tr>
+                  <th class="p-3">মেম্বারের নাম</th>
+                  <th class="p-3">মোবাইল নম্বর</th>
+                  <th class="p-3 text-center">সকালের মিল</th>
+                  <th class="p-3 text-center">রাতের মিল</th>
+                  <th class="p-3 text-center">স্ট্যাটাস</th>
+                </tr>
+              </thead>
+              <tbody id="tableDatewiseMealLogs" class="divide-y divide-slate-100">
+                <!-- JS populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. BAZAR ENTRY ==================== -->
       <section id="view-bazar-entry" class="space-y-6 hidden">
         <div class="bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-sm">
           <div class="mb-5 border-b pb-3">
@@ -324,7 +383,6 @@
           </div>
 
           <form id="bazarSubmitForm" onsubmit="submitBazarList(event)" class="space-y-4 text-xs">
-            
             <div>
               <label class="block font-semibold text-slate-600 mb-1">টাকার উৎস</label>
               <select id="bazarMoneySource" class="w-full p-2.5 border rounded-xl bg-slate-50 font-medium">
@@ -333,12 +391,12 @@
               </select>
             </div>
 
-            <!-- Dynamic Items Rows (Side by Side) -->
+            <!-- Side by Side Item Rows -->
             <div>
               <label class="block font-semibold text-slate-700 mb-2">পণ্যের বিবরণ ও দামের তালিকা:</label>
               <div id="bazarRowsContainer" class="space-y-2">
                 <div class="flex items-center space-x-2 bazar-item-row">
-                  <input type="text" placeholder="যেমন: আলু + পেঁয়াজ" class="w-2/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-name" required />
+                  <input type="text" placeholder="যেমন: শাকসবজি" class="w-2/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-name" required />
                   <input type="number" placeholder="দাম (৳)" class="w-1/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-price" oninput="calculateBazarTotal()" required />
                   <button type="button" onclick="removeBazarRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 flex items-center justify-center font-bold text-sm">✕</button>
                 </div>
@@ -350,7 +408,6 @@
               </button>
             </div>
 
-            <!-- Total Calculation Display -->
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-center justify-between">
               <span class="font-bold text-slate-700">বাজারের মোট টাকা:</span>
               <span id="bazarCalculatedTotal" class="text-xl font-black text-emerald-700">০ ৳</span>
@@ -362,10 +419,10 @@
           </form>
         </div>
 
-        <!-- My Submitted Bazars Status -->
+        <!-- My Submitted Bazars -->
         <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
           <div class="px-5 py-3.5 bg-slate-50 border-b font-bold text-xs text-slate-700">
-            আমার পাঠানো বাজারের স্ট্যাটাস
+            আমার পাঠানো বাজারের ইতিহাস
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-xs text-left">
@@ -386,8 +443,46 @@
         </div>
       </section>
 
-      <!-- ==================== 4. MANAGER SECTION ==================== -->
+      <!-- ==================== 5. PAST MONTH HISTORY ==================== -->
+      <section id="view-history-view" class="space-y-6 hidden">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 border-b pb-3 gap-3">
+            <div>
+              <h3 class="font-bold text-slate-800 text-sm md:text-base flex items-center space-x-2">
+                <i class="fa-solid fa-box-archive text-amber-600"></i>
+                <span>বিগত মাসসমূহের চূড়ান্ত হিসাব রেকর্ড</span>
+              </h3>
+              <p class="text-xs text-slate-400">অ্যাডমিন কর্তৃক মাস ক্লোজ করার পর পূর্ববর্তী মাসের সংরক্ষিত হিসাব</p>
+            </div>
+            <div>
+              <select id="selectArchivedMonth" onchange="renderArchivedSheet(this.value)" class="p-2 border rounded-xl bg-slate-50 text-xs font-bold">
+                <!-- JS Populated -->
+              </select>
+            </div>
+          </div>
+
+          <div id="archivedSheetContainer" class="overflow-x-auto">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. MANAGER SECTION ==================== -->
       <section id="view-manager-panel" class="space-y-6 hidden">
+
+        <!-- Month Complete Calculation Generator Button -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-5 rounded-2xl shadow-md flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div>
+            <h3 class="font-black text-base flex items-center space-x-2">
+              <i class="fa-solid fa-calculator text-amber-300"></i>
+              <span>মাস কমপ্লিট / ফাইনাল শিট তৈরি করুন</span>
+            </h3>
+            <p class="text-xs text-blue-100 mt-1">সব মেম্বারের মিল খরচ, ফিক্সড বিল ও বকেয়া হিসাব করে সবার সামনে প্রকাশ করুন।</p>
+          </div>
+          <button onclick="handleManagerMonthComplete()" class="w-full sm:w-auto px-5 py-2.5 bg-white text-blue-800 hover:bg-blue-50 font-black text-xs rounded-xl shadow transition">
+            <i class="fa-solid fa-arrows-rotate mr-1.5"></i> হিসাব ক্যালকুলেট করুন
+          </button>
+        </div>
         
         <!-- Pending Bazar Approvals -->
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
@@ -408,9 +503,9 @@
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
           <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center space-x-2">
             <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i>
-            <span>মেম্বারের অ্যাকাউন্টে টাকা যোগ করুন (Deposit Money)</span>
+            <span>মেম্বারের অ্যাকাউন্টে টাকা জমা এন্ট্রি (Deposit Money)</span>
           </h3>
-          <p class="text-xs text-slate-400 mb-4">যে মেম্বার টাকা জমা দিয়েছেন তাকে সিলেক্ট করে জমার পরিমাণ এন্ট্রি করুন।</p>
+          <p class="text-xs text-slate-400 mb-4">মেম্বার টাকা দিলে তাকে সিলেক্ট করে জমার পরিমাণ এন্ট্রি করুন।</p>
 
           <form id="managerDepositForm" onsubmit="handleManagerDeposit(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
             <div>
@@ -425,7 +520,7 @@
             </div>
             <div class="flex items-end">
               <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition">
-                <i class="fa-solid fa-plus-circle mr-1"></i> জমা যোগ করুন
+                <i class="fa-solid fa-plus-circle mr-1"></i> জমা কনফার্ম করুন
               </button>
             </div>
           </form>
@@ -436,9 +531,9 @@
           <div class="mb-3 border-b pb-2">
             <h3 class="font-bold text-slate-800 text-sm flex items-center space-x-2">
               <i class="fa-solid fa-toggle-on text-indigo-600"></i>
-              <span>মেম্বারদের মিল নিয়ন্ত্রণ ও ফোর্স অফ (Manager Meal Control)</span>
+              <span>মেম্বারদের মিল নিয়ন্ত্রণ ও ফোর্স অফ (Manager Control)</span>
             </h3>
-            <p class="text-xs text-slate-400">এখান থেকে কারো মিল বন্ধ (Force OFF) করে দিলে সে নিজে থেকে আর চালু করতে পারবে না।</p>
+            <p class="text-xs text-slate-400">ম্যানেজার কারও মিল বন্ধ করে দিলে সে নিজে থেকে আর চালু করতে পারবে না।</p>
           </div>
 
           <div class="overflow-x-auto">
@@ -460,17 +555,48 @@
 
       </section>
 
-      <!-- ==================== 5. ADMIN SECTION ==================== -->
+      <!-- ==================== 7. ADMIN SECTION ==================== -->
       <section id="view-admin-panel" class="space-y-6 hidden">
         
+        <!-- Create Account for Member -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+          <h3 class="font-bold text-slate-800 text-sm mb-1.5 flex items-center space-x-2">
+            <i class="fa-solid fa-user-plus text-emerald-600"></i>
+            <span>নতুন সদস্যের অ্যাকাউন্ট তৈরি করুন (Create User ID)</span>
+          </h3>
+          <p class="text-xs text-slate-400 mb-4">
+            অ্যাডমিন সদস্যের মোবাইল নম্বর, নাম এবং পাসওয়ার্ড সেট করে অ্যাকাউন্ট খুলে দেবেন।
+          </p>
+
+          <form id="adminCreateUserForm" onsubmit="handleAdminCreateUser(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-600 mb-1">মোবাইল নম্বর (Login ID)</label>
+              <input type="tel" id="adminNewUserPhone" placeholder="017xxxxxxxx" class="w-full p-2.5 border rounded-xl bg-slate-50" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-600 mb-1">সদস্যের নাম</label>
+              <input type="text" id="adminNewUserName" placeholder="যেমন: Saiful" class="w-full p-2.5 border rounded-xl bg-slate-50" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-600 mb-1">ডিফল্ট পাসওয়ার্ড</label>
+              <input type="text" id="adminNewUserPass" placeholder="e.g. 123" class="w-full p-2.5 border rounded-xl bg-slate-50" required />
+            </div>
+            <div class="flex items-end">
+              <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition">
+                <i class="fa-solid fa-user-check mr-1"></i> অ্যাকাউন্ট খুলুন
+              </button>
+            </div>
+          </form>
+        </div>
+
         <!-- Transfer Manager Role -->
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
           <h3 class="font-bold text-slate-800 text-sm mb-1.5 flex items-center space-x-2">
             <i class="fa-solid fa-user-shield text-amber-600"></i>
-            <span>নতুন মেস ম্যানেজার নিয়োগ / রিকোয়েস্ট পাঠান</span>
+            <span>ম্যানেজার নিয়োগ ও দায়িত্ব হস্তান্তর</span>
           </h3>
           <p class="text-xs text-slate-400 mb-4">
-            নির্দিষ্ট সদস্যকে ম্যানেজার হিসেবে রিকোয়েস্ট পাঠান। তিনি গ্রহণ (Accept) করলে বর্তমান ম্যানেজারের ক্ষমতা তার কাছে চলে যাবে।
+            নির্দিষ্ট সদস্যকে ম্যানেজার হওয়ার রিকোয়েস্ট পাঠান। তিনি এক্সেপ্ট করলে পুরনো ম্যানেজারের ক্ষমতা তার কাছে চলে যাবে।
           </p>
 
           <form id="adminTransferManagerForm" onsubmit="handleSendManagerRequest(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
@@ -493,11 +619,25 @@
           </div>
         </div>
 
+        <!-- Close Current Month -->
+        <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl shadow-sm">
+          <h3 class="font-black text-rose-900 text-sm mb-1 flex items-center space-x-2">
+            <i class="fa-solid fa-calendar-xmark text-rose-600"></i>
+            <span>চলতি মাস সমাপ্ত ও ক্লোজ করুন (Admin Month Close)</span>
+          </h3>
+          <p class="text-xs text-rose-700 mb-4 leading-relaxed">
+            মাস ক্লোজ করলে চলতি মাসের সকল মিল, বাজার ও খরচ আর্কাইভ হয়ে যাবে এবং প্রত্যেকের <strong>Due / Advance (+/-)</strong> ব্যালেন্স স্বয়ংক্রিয়ভাবে পরবর্তী মাসের ওপেনিং ব্যালেন্স হিসেবে জমা হবে।
+          </p>
+          <button onclick="handleAdminMonthClose()" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shadow transition">
+            <i class="fa-solid fa-lock mr-1.5"></i> চলতি মাস ক্লোজ ও নতুন মাস শুরু করুন
+          </button>
+        </div>
+
         <!-- Mess Settings & Name Change -->
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
           <h3 class="font-bold text-slate-800 text-sm mb-3 flex items-center space-x-2">
             <i class="fa-solid fa-gear text-slate-700"></i>
-            <span>মেসের সেটিংস ও নাম পরিবর্তন</span>
+            <span>মেসের নাম পরিবর্তন</span>
           </h3>
           <div class="flex flex-col sm:flex-row gap-3 text-xs">
             <input type="text" id="inputAdminMessName" placeholder="মেসের নতুন নাম" class="w-full p-2.5 border rounded-xl bg-slate-50 font-medium" />
@@ -511,6 +651,29 @@
 
     </main>
 
+  </div>
+
+  <!-- ==================== PROFILE EDIT MODAL ==================== -->
+  <div id="profileModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-2xl p-5 shadow-2xl border text-xs">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="font-bold text-sm text-slate-800">প্রোফাইল ও পাসওয়ার্ড পরিবর্তন</h3>
+        <button onclick="closeProfileModal()" class="text-slate-400 hover:text-slate-600 text-base">✕</button>
+      </div>
+      <form onsubmit="handleUpdateProfile(event)" class="space-y-3">
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1">আপনার নাম</label>
+          <input type="text" id="editProfileName" class="w-full p-2.5 border rounded-xl bg-slate-50 font-medium" required />
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1">নতুন পাসওয়ার্ড</label>
+          <input type="password" id="editProfilePassword" placeholder="নতুন পাসওয়ার্ড লিখুন" class="w-full p-2.5 border rounded-xl bg-slate-50 font-medium" required />
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl">
+          তথ্য আপডেট করুন
+        </button>
+      </form>
+    </div>
   </div>
 
   <!-- ==================== COOKING MENU MODAL ==================== -->

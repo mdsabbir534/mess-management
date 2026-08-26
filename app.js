@@ -1,26 +1,81 @@
-// Default Initial Mock Data
+// System State & Mock Data (Exact Sheet Data Integrated)
 let messInfo = {
   name: "সোনার বাংলা মেস",
-  adminPhone: "01700000001",
+  currentMonth: "June-2026",
+  managerName: "Shakil-2",
   managerPhone: "01700000002"
 };
 
+// Users list matching your exact June-2026 sheet
 let users = [
-  { id: 1, name: "Sabbir (Admin)", phone: "01700000001", role: "admin", deposit: 4500, meals: 36, isManagerPending: false, blockedByManager: false, today: { breakfast: 1, dinner: 1 } },
-  { id: 2, name: "Raz (Manager)", phone: "01700000002", role: "manager", deposit: 3800, meals: 34, isManagerPending: false, blockedByManager: false, today: { breakfast: 1, dinner: 1 } },
-  { id: 3, name: "Nahid", phone: "01700000003", role: "member", deposit: 3000, meals: 28, isManagerPending: false, blockedByManager: false, today: { breakfast: 1, dinner: 0 } },
-  { id: 4, name: "Hanif", phone: "01700000004", role: "member", deposit: 2500, meals: 26, isManagerPending: false, blockedByManager: false, today: { breakfast: 0, dinner: 1 } }
+  { id: 1, name: "Sabbir", phone: "01700000001", password: "123", role: "admin", meals: 62, deposit: 4925.01, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 2, name: "Shakil-2", phone: "01700000002", password: "123", role: "manager", meals: 40, deposit: 3999.55, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 3, name: "Sarkar", phone: "01700000003", password: "123", role: "member", meals: 49, deposit: 2969.74, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 4, name: "S.Uddin", phone: "01700000004", password: "123", role: "member", meals: 41, deposit: 3900.48, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 5, name: "Emon", phone: "01700000005", password: "123", role: "member", meals: 25, deposit: 2202.81, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 0 } },
+  { id: 6, name: "Hanif", phone: "01700000006", password: "123", role: "member", meals: 44, deposit: 3202.99, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 7, name: "Nahid", phone: "01700000007", password: "123", role: "member", meals: 54, deposit: 2904.53, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 8, name: "Shahjahan", phone: "01700000008", password: "123", role: "member", meals: 22, deposit: 1691.59, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 0, dinner: 1 } },
+  { id: 9, name: "Rezaul", phone: "01700000009", password: "123", role: "member", meals: 43, deposit: 2643.19, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 10, name: "Raz", phone: "01700000010", password: "123", role: "member", meals: 38, deposit: 3110.78, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 11, name: "Araf", phone: "01700000011", password: "123", role: "member", meals: 37, deposit: 2753.45, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 12, name: "Saiful", phone: "01700000012", password: "123", role: "member", meals: 35, deposit: 1618.63, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 1, dinner: 1 } },
+  { id: 13, name: "Shakil", phone: "01700000013", password: "123", role: "member", meals: 5, deposit: 961.52, openingDue: 0, blockedByManager: false, isManagerPending: false, today: { breakfast: 0, dinner: 0 } }
 ];
 
+// Shared Fixed Costs (Others in sheet = 1019.62 per person)
+let sharedFixedCosts = {
+  khalaBill: 7000,
+  electricityBill: 5000,
+  dustBill: 150,
+  gasBill: 1000,
+  kitchenLine: 105
+};
+
+// Approved Bazar Records
 let bazarRecords = [
-  { id: 1, shopperName: "Raz (Manager)", phone: "01700000002", date: "2026-08-25", items: "মুরগি (৮০০৳), তেল (২২০৳)", amount: 1020, source: "Pocket", status: "approved" },
-  { id: 2, shopperName: "Nahid", phone: "01700000003", date: "2026-08-26", items: "আলু (১২০৳), পেঁয়াজ (৮০৳), ডিম (১৪০৳)", amount: 340, source: "Pocket", status: "approved" }
+  { id: 1, shopperName: "Shakil-2", phone: "01700000002", date: "2026-08-25", items: "মুরগি, তেল, মশলা", amount: 3880, source: "Manager", status: "approved" },
+  { id: 2, shopperName: "Sabbir", phone: "01700000001", date: "2026-08-26", items: "মাছ, শাকসবজি", amount: 2512, source: "Pocket", status: "approved" },
+  { id: 3, shopperName: "Nahid", phone: "01700000007", date: "2026-08-27", items: "চাল, আলু, পেঁয়াজ", amount: 4527, source: "Pocket", status: "approved" }
 ];
 
 let pendingBazars = [];
 
-let isMealsLockedByKhala = false;
+// Datewise History Logs (Feature 8 & 9)
+let datewiseMealLogs = {
+  "2026-08-27": {
+    "01700000001": { breakfast: 1, dinner: 1 },
+    "01700000002": { breakfast: 1, dinner: 1 },
+    "01700000003": { breakfast: 1, dinner: 1 },
+    "01700000004": { breakfast: 1, dinner: 1 },
+    "01700000005": { breakfast: 1, dinner: 0 },
+    "01700000006": { breakfast: 1, dinner: 1 },
+    "01700000007": { breakfast: 1, dinner: 1 },
+    "01700000008": { breakfast: 0, dinner: 1 },
+    "01700000009": { breakfast: 1, dinner: 1 },
+    "01700000010": { breakfast: 1, dinner: 1 },
+    "01700000011": { breakfast: 1, dinner: 1 },
+    "01700000012": { breakfast: 1, dinner: 1 },
+    "01700000013": { breakfast: 0, dinner: 0 }
+  }
+};
 
+// Archived Past Month Sheets
+let archivedMonths = [
+  {
+    monthName: "May-2026",
+    managerName: "Raz",
+    mealRate: 56.40,
+    othersPerPerson: 980.00,
+    records: [
+      { name: "Sabbir", totalMeal: 58, mealCost: 3271.20, others: 980.00, totalCost: 4251.20, deposit: 4500.00, due: 248.80 },
+      { name: "Shakil-2", totalMeal: 42, mealCost: 2368.80, others: 980.00, totalCost: 3348.80, deposit: 3000.00, due: -348.80 },
+      { name: "Nahid", totalMeal: 50, mealCost: 2820.00, others: 980.00, totalCost: 3800.00, deposit: 3500.00, due: -300.00 }
+    ]
+  }
+];
+
+let isMealsLockedByKhala = false;
 let todayCookingMenu = {
   breakfast: "পরোটা, ডিম ভাজি, ডাল",
   dinner: "মুরগির মাংসের ঝোল, ডাল, ভাত"
@@ -30,7 +85,11 @@ let currentUser = null;
 
 // ==================== APP INITIALIZATION ====================
 window.addEventListener('DOMContentLoaded', () => {
-  const savedPhone = localStorage.getItem('mess_user_phone');
+  const todayStr = new Date().toISOString().split('T')[0];
+  document.getElementById('topTodayDateText').innerText = todayStr;
+  document.getElementById('calendarDateFilter').value = todayStr;
+
+  const savedPhone = localStorage.getItem('mess_active_phone');
   if (savedPhone) {
     const found = users.find(u => u.phone === savedPhone);
     if (found) {
@@ -46,9 +105,7 @@ function initAppSession() {
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('topMessTitle').innerText = messInfo.name;
   document.getElementById('topUserName').innerText = currentUser.name;
-  document.getElementById('topUserPhone').innerText = currentUser.phone;
 
-  // Role Badge
   const badge = document.getElementById('topUserRoleBadge');
   if (currentUser.role === 'admin') {
     badge.innerText = "👑 অ্যাডমিন";
@@ -67,113 +124,65 @@ function initAppSession() {
     document.getElementById('nav-admin-panel').classList.add('hidden');
   }
 
-  populateManagerOptions();
-  populateAdminOptions();
-
+  populateDropdowns();
   renderAll();
 }
 
-// ==================== AUTHENTICATION LOGIC ====================
-function toggleAuthMode(mode) {
-  const isLogin = mode === 'login';
-  document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
-  document.getElementById('registerForm').classList.toggle('hidden', isLogin);
-
-  document.getElementById('btnAuthLogin').className = isLogin 
-    ? "w-1/2 py-2.5 rounded-lg bg-white shadow-sm text-emerald-700 font-bold"
-    : "w-1/2 py-2.5 rounded-lg text-slate-500";
-    
-  document.getElementById('btnAuthRegister').className = !isLogin 
-    ? "w-1/2 py-2.5 rounded-lg bg-white shadow-sm text-emerald-700 font-bold"
-    : "w-1/2 py-2.5 rounded-lg text-slate-500";
-}
-
-function toggleMessNameField(role) {
-  document.getElementById('messNameBox').classList.toggle('hidden', role !== 'admin');
-}
-
+// ==================== AUTHENTICATION ====================
 function handleLogin(e) {
   e.preventDefault();
   const phone = document.getElementById('loginPhone').value.trim();
-  const user = users.find(u => u.phone === phone);
+  const pass = document.getElementById('loginPassword').value.trim();
 
+  const user = users.find(u => u.phone === phone && u.password === pass);
   if (user) {
     currentUser = user;
-    localStorage.setItem('mess_user_phone', phone);
+    localStorage.setItem('mess_active_phone', phone);
     initAppSession();
     showToast(`স্বাগতম, ${user.name}!`);
   } else {
-    alert("এই নম্বরে কোনো অ্যাকাউন্ট পাওয়া যায়নি। দয়া করে রেজিস্ট্রেশন করুন।");
+    alert("ভুল মোবাইল নম্বর অথবা পাসওয়ার্ড দেওয়া হয়েছে!");
   }
 }
 
-function quickLogin(phone) {
+function quickLogin(phone, pass) {
   const user = users.find(u => u.phone === phone);
   if (user) {
     currentUser = user;
-    localStorage.setItem('mess_user_phone', phone);
+    localStorage.setItem('mess_active_phone', phone);
     initAppSession();
     showToast(`${user.name} হিসেবে লগইন করা হয়েছে!`);
   }
 }
 
-function handleRegister(e) {
-  e.preventDefault();
-  const name = document.getElementById('regName').value.trim();
-  const phone = document.getElementById('regPhone').value.trim();
-  const role = document.getElementById('regRole').value;
-  const messName = document.getElementById('regMessName').value.trim();
-
-  if (users.find(u => u.phone === phone)) {
-    alert("এই নম্বর দিয়ে ইতিমধ্যে অ্যাকাউন্ট খোলা হয়েছে!");
-    return;
-  }
-
-  if (role === 'admin' && messName) {
-    messInfo.name = messName;
-    messInfo.adminPhone = phone;
-  }
-
-  const newUser = {
-    id: Date.now(),
-    name,
-    phone,
-    role,
-    deposit: 0,
-    meals: 0,
-    isManagerPending: false,
-    blockedByManager: false,
-    today: { breakfast: 1, dinner: 1 }
-  };
-
-  users.push(newUser);
-  currentUser = newUser;
-  localStorage.setItem('mess_user_phone', phone);
-  initAppSession();
-  showToast("রেজিস্ট্রেশন সফল হয়েছে!");
-}
-
 function handleLogout() {
-  localStorage.removeItem('mess_user_phone');
+  localStorage.removeItem('mess_active_phone');
   currentUser = null;
   document.getElementById('authScreen').classList.remove('hidden');
 }
 
 // ==================== NAVIGATION TABS ====================
 function switchTab(viewId) {
-  const views = ['dashboard', 'active-meals', 'bazar-entry', 'manager-panel', 'admin-panel'];
+  const views = ['dashboard', 'active-meals', 'meal-calendar', 'bazar-entry', 'history-view', 'manager-panel', 'admin-panel'];
   views.forEach(v => {
     const el = document.getElementById(`view-${v}`);
     const navBtn = document.getElementById(`nav-${v}`);
     if (el) el.classList.toggle('hidden', v !== viewId);
     if (navBtn) {
       if (v === viewId) {
-        navBtn.className = "py-2.5 px-3 min-w-[90px] text-center border-b-2 border-white font-bold bg-emerald-900/50 text-white";
+        navBtn.className = "py-2.5 px-3 min-w-[85px] text-center border-b-2 border-white font-bold bg-emerald-900/50 text-white";
       } else {
-        navBtn.className = "py-2.5 px-3 min-w-[90px] text-center text-emerald-200 hover:text-white";
+        navBtn.className = "py-2.5 px-3 min-w-[85px] text-center text-emerald-200 hover:text-white";
       }
     }
   });
+
+  if (viewId === 'meal-calendar') {
+    renderCalendarView(document.getElementById('calendarDateFilter').value);
+  }
+  if (viewId === 'history-view') {
+    populateArchiveDropdown();
+  }
 
   renderAll();
 }
@@ -190,21 +199,26 @@ function showToast(msg, isError = false) {
   setTimeout(() => toast.classList.add('hidden'), 3500);
 }
 
-// ==================== MEAL COUNT & MULTIPLE MEALS ====================
+// ==================== MEAL COUNT ====================
 function changeMealCount(mealType, delta) {
   if (isMealsLockedByKhala) {
     alert("খালাকে হিসাব বুঝিয়ে দেওয়ার পর মিল লক হয়ে গেছে। এখন আর পরিবর্তন সম্ভব নয়।");
     return;
   }
-
   if (currentUser.blockedByManager) {
-    alert("ম্যানেজার আপনার মিল বন্ধ করে রেখেছেন। আপনি নিজে চালু করতে পারবেন না।");
+    alert("ম্যানেজার আপনার মিল বন্ধ ও লক করে রেখেছেন।");
     return;
   }
 
   const currentCount = currentUser.today[mealType];
   const newCount = Math.max(0, currentCount + delta);
   currentUser.today[mealType] = newCount;
+
+  // Sync to today's datewise log
+  const todayStr = new Date().toISOString().split('T')[0];
+  if (!datewiseMealLogs[todayStr]) datewiseMealLogs[todayStr] = {};
+  if (!datewiseMealLogs[todayStr][currentUser.phone]) datewiseMealLogs[todayStr][currentUser.phone] = {};
+  datewiseMealLogs[todayStr][currentUser.phone][mealType] = newCount;
 
   renderAll();
 }
@@ -215,13 +229,48 @@ function toggleKhalaLock() {
   renderAll();
 }
 
+// ==================== DATEWISE CALENDAR ====================
+function renderCalendarView(selectedDate) {
+  const table = document.getElementById('tableDatewiseMealLogs');
+  const logs = datewiseMealLogs[selectedDate] || {};
+
+  table.innerHTML = users.map(u => {
+    const userLog = logs[u.phone] || { breakfast: u.today.breakfast, dinner: u.today.dinner };
+    const hasBf = userLog.breakfast > 0;
+    const hasDin = userLog.dinner > 0;
+    const isEating = hasBf || hasDin;
+
+    return `
+      <tr class="hover:bg-slate-50">
+        <td class="p-3 font-bold text-slate-800">${u.name}</td>
+        <td class="p-3 text-slate-500 font-mono">${u.phone}</td>
+        <td class="p-3 text-center">
+          <span class="px-2.5 py-1 rounded-lg text-xs font-black ${hasBf ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-slate-100 text-slate-400'}">
+            ${userLog.breakfast} মিল (${hasBf ? 'খেয়েছে' : 'খায়নি'})
+          </span>
+        </td>
+        <td class="p-3 text-center">
+          <span class="px-2.5 py-1 rounded-lg text-xs font-black ${hasDin ? 'bg-indigo-100 text-indigo-800 border border-indigo-200' : 'bg-slate-100 text-slate-400'}">
+            ${userLog.dinner} মিল (${hasDin ? 'খেয়েছে' : 'খায়নি'})
+          </span>
+        </td>
+        <td class="p-3 text-center">
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isEating ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
+            ${isEating ? 'চালু ছিল' : 'বন্ধ ছিল'}
+          </span>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
 // ==================== BAZAR ENTRY WITH TWO-COLUMN ROWS ====================
 function addBazarRow() {
   const container = document.getElementById('bazarRowsContainer');
   const newRow = document.createElement('div');
   newRow.className = "flex items-center space-x-2 bazar-item-row";
   newRow.innerHTML = `
-    <input type="text" placeholder="পণ্যের নাম (যেমন: শাকসবজি)" class="w-2/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-name" required />
+    <input type="text" placeholder="যেমন: শাকসবজি" class="w-2/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-name" required />
     <input type="number" placeholder="দাম (৳)" class="w-1/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-price" oninput="calculateBazarTotal()" required />
     <button type="button" onclick="removeBazarRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 flex items-center justify-center font-bold text-sm">✕</button>
   `;
@@ -240,10 +289,8 @@ function removeBazarRow(btn) {
 
 function calculateBazarTotal() {
   let total = 0;
-  const priceInputs = document.querySelectorAll('.item-price');
-  priceInputs.forEach(input => {
-    const val = parseFloat(input.value) || 0;
-    total += val;
+  document.querySelectorAll('.item-price').forEach(input => {
+    total += parseFloat(input.value) || 0;
   });
   document.getElementById('bazarCalculatedTotal').innerText = `${total} ৳`;
   return total;
@@ -252,24 +299,17 @@ function calculateBazarTotal() {
 function submitBazarList(e) {
   e.preventDefault();
   const total = calculateBazarTotal();
-  if (total <= 0) {
-    alert("সঠিক দাম লিখুন।");
-    return;
-  }
+  if (total <= 0) return alert("সঠিক দাম লিখুন।");
 
-  const rows = document.querySelectorAll('.bazar-item-row');
   const itemList = [];
-  rows.forEach(r => {
+  document.querySelectorAll('.bazar-item-row').forEach(r => {
     const name = r.querySelector('.item-name').value.trim();
     const price = r.querySelector('.item-price').value.trim();
-    if (name && price) {
-      itemList.push(`${name} (${price}৳)`);
-    }
+    if (name && price) itemList.push(`${name} (${price}৳)`);
   });
 
   const source = document.getElementById('bazarMoneySource').value;
-
-  const newBazar = {
+  pendingBazars.unshift({
     id: Date.now(),
     shopperName: currentUser.name,
     phone: currentUser.phone,
@@ -278,12 +318,9 @@ function submitBazarList(e) {
     amount: total,
     source,
     status: "pending"
-  };
+  });
 
-  pendingBazars.unshift(newBazar);
-  showToast("বাজারের তালিকা ম্যানেজারের অনুমোদনের জন্য পাঠানো হয়েছে!");
-
-  // Reset Form
+  showToast("বাজারের তালিকা ম্যানেজারের কাছে পাঠানো হয়েছে!");
   document.getElementById('bazarRowsContainer').innerHTML = `
     <div class="flex items-center space-x-2 bazar-item-row">
       <input type="text" placeholder="যেমন: আলু + পেঁয়াজ" class="w-2/3 p-2.5 border border-slate-200 rounded-xl bg-slate-50 font-medium item-name" required />
@@ -292,17 +329,16 @@ function submitBazarList(e) {
     </div>
   `;
   document.getElementById('bazarCalculatedTotal').innerText = "০ ৳";
-
   renderAll();
 }
 
-// ==================== MANAGER ACTIONS ====================
+// ==================== MANAGER CONTROLS ====================
 function handleManagerDeposit(e) {
   e.preventDefault();
-  const targetPhone = document.getElementById('depositSelectUser').value;
+  const phone = document.getElementById('depositSelectUser').value;
   const amount = parseFloat(document.getElementById('depositInputAmount').value);
+  const member = users.find(u => u.phone === phone);
 
-  const member = users.find(u => u.phone === targetPhone);
   if (member && amount > 0) {
     member.deposit += amount;
     showToast(`${member.name}-এর ব্যালেন্সে ${amount} ৳ জমা কনফার্ম করা হয়েছে!`);
@@ -311,72 +347,105 @@ function handleManagerDeposit(e) {
   }
 }
 
-function approvePendingBazar(bazarId) {
-  const index = pendingBazars.findIndex(b => b.id === bazarId);
-  if (index > -1) {
-    const item = pendingBazars[index];
+function approvePendingBazar(id) {
+  const idx = pendingBazars.findIndex(b => b.id === id);
+  if (idx > -1) {
+    const item = pendingBazars[idx];
     item.status = "approved";
     bazarRecords.unshift(item);
 
-    // If paid from Pocket, auto-add to member deposit
     if (item.source === "Pocket") {
       const shopper = users.find(u => u.phone === item.phone);
-      if (shopper) {
-        shopper.deposit += item.amount;
-      }
+      if (shopper) shopper.deposit += item.amount;
     }
-
-    pendingBazars.splice(index, 1);
+    pendingBazars.splice(idx, 1);
     showToast(`বাজার বাবদ ${item.amount} ৳ অনুমোদন করা হয়েছে!`);
     renderAll();
   }
 }
 
-function rejectPendingBazar(bazarId) {
-  const index = pendingBazars.findIndex(b => b.id === bazarId);
-  if (index > -1) {
-    pendingBazars.splice(index, 1);
+function rejectPendingBazar(id) {
+  const idx = pendingBazars.findIndex(b => b.id === id);
+  if (idx > -1) {
+    pendingBazars.splice(idx, 1);
     showToast("বাজার বাতিল করা হয়েছে!", true);
     renderAll();
   }
 }
 
-function toggleManagerBlockMeal(userPhone) {
-  const user = users.find(u => u.phone === userPhone);
+function toggleManagerBlockMeal(phone) {
+  const user = users.find(u => u.phone === phone);
   if (user) {
     user.blockedByManager = !user.blockedByManager;
     if (user.blockedByManager) {
       user.today.breakfast = 0;
       user.today.dinner = 0;
-      showToast(`${user.name}-এর মিল বন্ধ ও ব্লক করা হয়েছে!`);
+      showToast(`${user.name}-এর মিল ফোর্স অফ ও লক করা হয়েছে!`);
     } else {
       user.today.breakfast = 1;
       user.today.dinner = 1;
-      showToast(`${user.name}-এর মিল আনব্লক করা হয়েছে!`);
+      showToast(`${user.name}-এর মিল আনলক করা হয়েছে!`);
     }
     renderAll();
   }
 }
 
-// ==================== ADMIN ACTIONS & MANAGER HANDOVER ====================
+function handleManagerMonthComplete() {
+  showToast("চলতি মাসের ফাইনাল শিট ক্যালকুলেট করা হয়েছে!");
+  renderAll();
+}
+
+// ==================== ADMIN CONTROLS ====================
+function handleAdminCreateUser(e) {
+  e.preventDefault();
+  const phone = document.getElementById('adminNewUserPhone').value.trim();
+  const name = document.getElementById('adminNewUserName').value.trim();
+  const password = document.getElementById('adminNewUserPass').value.trim();
+
+  if (users.find(u => u.phone === phone)) {
+    return alert("এই নম্বরে ইতিমধ্যে অ্যাকাউন্ট আছে!");
+  }
+
+  users.push({
+    id: Date.now(),
+    name,
+    phone,
+    password,
+    role: "member",
+    meals: 0,
+    deposit: 0,
+    openingDue: 0,
+    blockedByManager: false,
+    isManagerPending: false,
+    today: { breakfast: 1, dinner: 1 }
+  });
+
+  showToast(`${name} (${phone})-এর অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!`);
+  document.getElementById('adminNewUserPhone').value = '';
+  document.getElementById('adminNewUserName').value = '';
+  document.getElementById('adminNewUserPass').value = '';
+  populateDropdowns();
+  renderAll();
+}
+
 function handleSendManagerRequest(e) {
   e.preventDefault();
-  const selectedPhone = document.getElementById('adminSelectNewManager').value;
-  const targetUser = users.find(u => u.phone === selectedPhone);
-
-  if (targetUser) {
-    targetUser.isManagerPending = true;
-    showToast(`${targetUser.name}-এর কাছে ম্যানেজার হওয়ার রিকোয়েস্ট পাঠানো হয়েছে!`);
+  const phone = document.getElementById('adminSelectNewManager').value;
+  const target = users.find(u => u.phone === phone);
+  if (target) {
+    target.isManagerPending = true;
+    showToast(`${target.name}-এর কাছে ম্যানেজার হওয়ার রিকোয়েস্ট পাঠানো হয়েছে!`);
     renderAll();
   }
 }
 
 function acceptManagerOffer() {
-  const oldManager = users.find(u => u.role === 'manager');
-  if (oldManager) oldManager.role = 'member';
+  const old = users.find(u => u.role === 'manager');
+  if (old) old.role = 'member';
 
   currentUser.role = 'manager';
   currentUser.isManagerPending = false;
+  messInfo.managerName = currentUser.name;
   messInfo.managerPhone = currentUser.phone;
 
   showToast("অভিনন্দন! আপনি এখন মেসের নতুন ম্যানেজার।");
@@ -389,17 +458,88 @@ function rejectManagerOffer() {
   renderAll();
 }
 
+function handleAdminMonthClose() {
+  if (!confirm("আপনি কি নিশ্চিত যে চলতি মাস ক্লোজ করে নতুন মাস শুরু করতে চান? সবার বকেয়া/অগ্রিম নতুন মাসে যুক্ত হবে।")) return;
+
+  const totalBazar = bazarRecords.reduce((sum, b) => sum + b.amount, 0);
+  const totalMeals = users.reduce((sum, u) => sum + u.meals, 0) || 1;
+  const mealRate = totalBazar / totalMeals;
+  const totalShared = Object.values(sharedFixedCosts).reduce((a, b) => a + b, 0);
+  const othersPerPerson = totalShared / (users.length || 1);
+
+  const monthArchiveRecords = users.map(u => {
+    const mealCost = u.meals * mealRate;
+    const totalCost = mealCost + othersPerPerson;
+    const due = u.deposit - totalCost;
+    return {
+      name: u.name,
+      phone: u.phone,
+      totalMeal: u.meals,
+      mealCost: mealCost,
+      others: othersPerPerson,
+      totalCost: totalCost,
+      deposit: u.deposit,
+      due: due
+    };
+  });
+
+  archivedMonths.unshift({
+    monthName: messInfo.currentMonth,
+    managerName: messInfo.managerName,
+    mealRate: mealRate,
+    othersPerPerson: othersPerPerson,
+    records: monthArchiveRecords
+  });
+
+  users.forEach(u => {
+    const rec = monthArchiveRecords.find(r => r.phone === u.phone);
+    u.openingDue = rec ? rec.due : 0;
+    u.deposit = rec && rec.due > 0 ? rec.due : 0;
+    u.meals = 0;
+    u.blockedByManager = false;
+  });
+
+  bazarRecords = [];
+  pendingBazars = [];
+  messInfo.currentMonth = "July-2026";
+
+  showToast("মাস সফলভাবে ক্লোজ হয়েছে! নতুন মাস শুরু হয়েছে।");
+  populateArchiveDropdown();
+  renderAll();
+}
+
 function updateMessName() {
-  const newName = document.getElementById('inputAdminMessName').value.trim();
-  if (newName) {
-    messInfo.name = newName;
-    document.getElementById('topMessTitle').innerText = newName;
-    showToast("মেসের নাম সফলভাবে পরিবর্তন করা হয়েছে!");
+  const name = document.getElementById('inputAdminMessName').value.trim();
+  if (name) {
+    messInfo.name = name;
+    document.getElementById('topMessTitle').innerText = name;
+    showToast("মেসের নাম আপডেট হয়েছে!");
     document.getElementById('inputAdminMessName').value = '';
   }
 }
 
-// ==================== COOKING MENU MODAL ====================
+// ==================== PROFILE EDIT ====================
+function openProfileModal() {
+  document.getElementById('editProfileName').value = currentUser.name;
+  document.getElementById('editProfilePassword').value = currentUser.password;
+  document.getElementById('profileModal').classList.remove('hidden');
+}
+
+function closeProfileModal() {
+  document.getElementById('profileModal').classList.add('hidden');
+}
+
+function handleUpdateProfile(e) {
+  e.preventDefault();
+  currentUser.name = document.getElementById('editProfileName').value.trim();
+  currentUser.password = document.getElementById('editProfilePassword').value.trim();
+  closeProfileModal();
+  document.getElementById('topUserName').innerText = currentUser.name;
+  showToast("প্রোফাইল ও পাসওয়ার্ড আপডেট হয়েছে!");
+  renderAll();
+}
+
+// ==================== MENU MODAL ====================
 function openMenuModal() {
   document.getElementById('inputMenuBreakfast').value = todayCookingMenu.breakfast;
   document.getElementById('inputMenuDinner').value = todayCookingMenu.dinner;
@@ -414,63 +554,110 @@ function saveMenu() {
   todayCookingMenu.breakfast = document.getElementById('inputMenuBreakfast').value.trim() || "পরোটা, ডিম ভাজি";
   todayCookingMenu.dinner = document.getElementById('inputMenuDinner').value.trim() || "মাংসের ঝোল, ডাল, ভাত";
   closeMenuModal();
-  showToast("আজকের রান্নার মেন্যু সেভ হয়েছে!");
+  showToast("রান্নার মেন্যু সেভ হয়েছে!");
   renderAll();
 }
 
-// ==================== POPULATE SELECT DROPDOWNS ====================
-function populateManagerOptions() {
-  const select = document.getElementById('depositSelectUser');
-  if (select) {
-    select.innerHTML = users.map(u => `<option value="${u.phone}">${u.name} (${u.phone})</option>`).join('');
-  }
-}
+// ==================== DROPDOWNS & ARCHIVES ====================
+function populateDropdowns() {
+  const depSelect = document.getElementById('depositSelectUser');
+  if (depSelect) depSelect.innerHTML = users.map(u => `<option value="${u.phone}">${u.name} (${u.phone})</option>`).join('');
 
-function populateAdminOptions() {
-  const select = document.getElementById('adminSelectNewManager');
-  if (select) {
-    select.innerHTML = users.filter(u => u.role !== 'admin').map(u => `<option value="${u.phone}">${u.name} (${u.phone})</option>`).join('');
-  }
-  const mgr = users.find(u => u.role === 'manager');
+  const adminMgr = document.getElementById('adminSelectNewManager');
+  if (adminMgr) adminMgr.innerHTML = users.filter(u => u.role !== 'admin').map(u => `<option value="${u.phone}">${u.name} (${u.phone})</option>`).join('');
+
   const badge = document.getElementById('currentManagerNameBadge');
-  if (badge) badge.innerText = mgr ? `${mgr.name} (${mgr.phone})` : "কেউ নেই";
+  if (badge) badge.innerText = `${messInfo.managerName} (${messInfo.managerPhone})`;
 }
 
-// ==================== MAIN RENDER UI FUNCTION ====================
+function populateArchiveDropdown() {
+  const sel = document.getElementById('selectArchivedMonth');
+  if (sel) {
+    sel.innerHTML = archivedMonths.map((m, idx) => `<option value="${idx}">${m.monthName} (ম্যানেজার: ${m.managerName})</option>`).join('');
+    if (archivedMonths.length > 0) renderArchivedSheet(0);
+  }
+}
+
+function renderArchivedSheet(index) {
+  const month = archivedMonths[index];
+  const container = document.getElementById('archivedSheetContainer');
+  if (!month) {
+    container.innerHTML = "<p class='text-slate-400 p-4'>কোনো রেকর্ড নেই</p>";
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="mb-3 text-xs bg-slate-50 p-3 rounded-xl border flex justify-between items-center">
+      <span>মাস: <strong>${month.monthName}</strong> | ম্যানেজার: <strong>${month.managerName}</strong></span>
+      <span>মিল রেট: <strong>${month.mealRate.toFixed(2)} ৳</strong> | ফিক্সড বিল: <strong>${month.othersPerPerson.toFixed(2)} ৳</strong></span>
+    </div>
+    <table class="w-full text-xs text-left">
+      <thead class="bg-slate-100 font-bold border-b">
+        <tr>
+          <th class="p-3">Name</th>
+          <th class="p-3 text-center">Total Meal</th>
+          <th class="p-3 text-right">Meal Cost</th>
+          <th class="p-3 text-right">Others</th>
+          <th class="p-3 text-right">Total Cost</th>
+          <th class="p-3 text-right">Deposit</th>
+          <th class="p-3 text-right">Due</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        ${month.records.map(r => `
+          <tr>
+            <td class="p-3 font-bold">${r.name}</td>
+            <td class="p-3 text-center">${r.totalMeal}</td>
+            <td class="p-3 text-right">${r.mealCost.toFixed(2)}</td>
+            <td class="p-3 text-right">${r.others.toFixed(2)}</td>
+            <td class="p-3 text-right font-semibold">${r.totalCost.toFixed(2)}</td>
+            <td class="p-3 text-right text-emerald-700 font-semibold">${r.deposit.toFixed(2)}</td>
+            <td class="p-3 text-right font-black ${r.due >= 0 ? 'text-slate-800' : 'text-rose-600'}">${r.due.toFixed(2)}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+// ==================== MAIN RENDER ====================
 function renderAll() {
   if (!currentUser) return;
 
-  // 1. Calculations
-  const totalBazarApproved = bazarRecords.reduce((sum, b) => sum + b.amount, 0);
-  const totalMealsConsumed = users.reduce((sum, u) => sum + u.meals, 0) || 1;
-  const mealRate = totalBazarApproved / totalMealsConsumed;
+  const totalBazar = bazarRecords.reduce((sum, b) => sum + b.amount, 0);
+  const totalMeals = users.reduce((sum, u) => sum + u.meals, 0) || 1;
+  const mealRate = totalBazar / totalMeals;
 
-  // Current User Stats
+  const totalShared = Object.values(sharedFixedCosts).reduce((a, b) => a + b, 0);
+  const othersPerPerson = totalShared / (users.length || 1);
+
   const userMealCost = currentUser.meals * mealRate;
-  const userBalance = currentUser.deposit - userMealCost;
+  const userTotalCost = userMealCost + othersPerPerson;
+  const userBalance = currentUser.deposit - userTotalCost + currentUser.openingDue;
 
-  // Top Stats UI
-  const balanceEl = document.getElementById('userBalanceText');
-  balanceEl.innerText = `${userBalance.toFixed(1)} ৳`;
-  balanceEl.className = `text-2xl font-black mt-1 ${userBalance >= 0 ? 'text-emerald-600' : 'text-rose-600'}`;
-  document.getElementById('userBalanceStatus').innerText = userBalance >= 0 ? "পাবেন (Advance)" : "দিতে হবে (Due)";
+  const balEl = document.getElementById('userBalanceText');
+  balEl.innerText = `${userBalance.toFixed(1)} ৳`;
+  balEl.className = `text-2xl font-black mt-1 ${userBalance >= 0 ? 'text-emerald-600' : 'text-rose-600'}`;
+  document.getElementById('userBalanceStatus').innerText = userBalance >= 0 ? "পাবেন (Advance)" : "দিতে হবে (Due / Minus)";
 
   document.getElementById('statMealRate').innerText = `${mealRate.toFixed(2)} ৳`;
-  document.getElementById('statTotalMessCost').innerText = `মোট বাজার: ${totalBazarApproved} ৳`;
+  document.getElementById('statTotalMessCost').innerText = `মোট বাজার: ${totalBazar} ৳`;
   document.getElementById('userTotalMealsCount').innerText = `${currentUser.meals} মিল`;
-  document.getElementById('statTotalMessMeals').innerText = `মেস মোট: ${totalMealsConsumed} মিল`;
+  document.getElementById('statTotalMessMeals').innerText = `মেস মোট: ${totalMeals} মিল`;
   document.getElementById('userTotalDepositText').innerText = `${currentUser.deposit} ৳`;
 
-  // Meal Counters UI
   document.getElementById('textBreakfastCount').innerText = `${currentUser.today.breakfast} মিল`;
   document.getElementById('textDinnerCount').innerText = `${currentUser.today.dinner} মিল`;
 
-  // Lock Badge & Lock Warnings
+  const totalBfToday = users.reduce((sum, u) => sum + u.today.breakfast, 0);
+  const totalDinToday = users.reduce((sum, u) => sum + u.today.dinner, 0);
+  document.getElementById('bannerTotalBf').innerText = totalBfToday;
+  document.getElementById('bannerTotalDin').innerText = totalDinToday;
+  document.getElementById('activeTotalMealsBadge').innerText = `সকাল: ${totalBfToday} | রাত: ${totalDinToday}`;
+
   const lockBadge = document.getElementById('badgeLockStatus');
   const btnLockKhala = document.getElementById('btnLockKhala');
-  const managerBlockAlert = document.getElementById('managerForcedOffAlert');
-
-  managerBlockAlert.classList.toggle('hidden', !currentUser.blockedByManager);
+  document.getElementById('managerForcedOffAlert').classList.toggle('hidden', !currentUser.blockedByManager);
 
   const disableInputs = isMealsLockedByKhala || currentUser.blockedByManager;
   ['btnMinusBreakfast', 'btnPlusBreakfast', 'btnMinusDinner', 'btnPlusDinner'].forEach(id => {
@@ -490,40 +677,51 @@ function renderAll() {
     btnLockKhala.innerHTML = `<i class="fa-solid fa-lock"></i> <span>খালাকে হিসাব বুঝিয়ে দিয়ে মিল লক করুন</span>`;
   }
 
-  // Manager Handover Request Banner
   document.getElementById('managerRequestBanner').classList.toggle('hidden', !currentUser.isManagerPending);
-
-  // Cooking Menu
   document.getElementById('displayMenuBreakfast').innerText = todayCookingMenu.breakfast;
   document.getElementById('displayMenuDinner').innerText = todayCookingMenu.dinner;
 
-  // 2. Render Live Member Table
-  const allTable = document.getElementById('tableAllMembersLive');
-  allTable.innerHTML = users.map(u => {
-    const cost = u.meals * mealRate;
-    const bal = u.deposit - cost;
+  let sumMealCost = 0, sumTotalCost = 0, sumDeposit = 0, sumDue = 0;
+  const tableAll = document.getElementById('tableAllMembersLive');
+  tableAll.innerHTML = users.map(u => {
+    const mCost = u.meals * mealRate;
+    const tCost = mCost + othersPerPerson;
+    const due = u.deposit - tCost + u.openingDue;
+
+    sumMealCost += mCost;
+    sumTotalCost += tCost;
+    sumDeposit += u.deposit;
+    sumDue += due;
+
     const isMe = u.phone === currentUser.phone;
 
     return `
       <tr class="${isMe ? 'bg-emerald-50/70 font-bold' : 'hover:bg-slate-50'}">
-        <td class="p-3.5">
-          <div class="font-bold text-slate-800">${u.name} ${isMe ? '<span class="text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded ml-1">You</span>' : ''}</div>
-          <div class="text-[10px] text-slate-400 font-mono">${u.phone}</div>
+        <td class="p-3 font-semibold text-slate-800">
+          ${u.name} ${isMe ? '<span class="text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded ml-1">You</span>' : ''}
         </td>
-        <td class="p-3.5 font-semibold text-blue-600">${u.meals}</td>
-        <td class="p-3.5 text-slate-700 font-medium">${u.deposit} ৳</td>
-        <td class="p-3.5 text-slate-600 font-medium">${cost.toFixed(1)} ৳</td>
-        <td class="p-3.5 font-bold ${bal >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
-          ${bal.toFixed(1)} ৳
+        <td class="p-3 text-center font-bold text-blue-600">${u.meals}</td>
+        <td class="p-3 text-right">${mealRate.toFixed(2)}</td>
+        <td class="p-3 text-right">${mCost.toFixed(2)}</td>
+        <td class="p-3 text-right">${othersPerPerson.toFixed(2)}</td>
+        <td class="p-3 text-right font-bold text-slate-700">${tCost.toFixed(2)}</td>
+        <td class="p-3 text-right text-emerald-700 font-semibold">${u.deposit.toFixed(2)}</td>
+        <td class="p-3 text-right font-black ${due >= 0 ? 'text-slate-800' : 'text-rose-600'}">
+          ${due.toFixed(2)}
         </td>
       </tr>
     `;
   }).join('');
 
-  // 3. Render Active Meals
-  const totalBfToday = users.reduce((sum, u) => sum + u.today.breakfast, 0);
-  const totalDinToday = users.reduce((sum, u) => sum + u.today.dinner, 0);
-  document.getElementById('activeTotalMealsBadge').innerText = `সকাল: ${totalBfToday} | রাত: ${totalDinToday}`;
+  document.getElementById('footTotalMeals').innerText = totalMeals;
+  document.getElementById('footTotalMealCost').innerText = sumMealCost.toFixed(2);
+  document.getElementById('footTotalOthers').innerText = (othersPerPerson * users.length).toFixed(2);
+  document.getElementById('footTotalCost').innerText = sumTotalCost.toFixed(2);
+  document.getElementById('footTotalDeposit').innerText = sumDeposit.toFixed(2);
+  
+  const footDue = document.getElementById('footTotalDue');
+  footDue.innerText = sumDue.toFixed(2);
+  footDue.className = `p-3 text-right font-black ${sumDue >= 0 ? 'text-slate-800' : 'text-rose-600'}`;
 
   const activeGrid = document.getElementById('activeMembersGrid');
   activeGrid.innerHTML = users.map(u => {
@@ -551,7 +749,6 @@ function renderAll() {
     `;
   }).join('');
 
-  // 4. Render My Submitted Bazars
   const myBazarTable = document.getElementById('mySubmittedBazarList');
   const myBazars = [...pendingBazars, ...bazarRecords].filter(b => b.phone === currentUser.phone);
   if (myBazars.length === 0) {
@@ -572,10 +769,8 @@ function renderAll() {
     `).join('');
   }
 
-  // 5. Render Manager Pending Bazar Approvals
   const pendingContainer = document.getElementById('pendingBazarListContainer');
   document.getElementById('pendingBazarCountBadge').innerText = `${pendingBazars.length} টি অপেক্ষমাণ`;
-
   if (pendingBazars.length === 0) {
     pendingContainer.innerHTML = `<p class="text-slate-400 text-center py-3">কোনো অনুমোদনের রিকোয়েস্ট নেই</p>`;
   } else {
@@ -590,17 +785,16 @@ function renderAll() {
           <span class="font-black text-amber-800 text-sm mt-0.5 block">মোট: ${b.amount} ৳</span>
         </div>
         <div class="flex space-x-2 w-full sm:w-auto">
-          <button onclick="approvePendingBazar(${b.id})" class="flex-1 sm:flex-none px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow">অনুমোদন করুন</button>
+          <button onclick="approvePendingBazar(${b.id})" class="flex-1 sm:flex-none px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow">অনুমোদন</button>
           <button onclick="rejectPendingBazar(${b.id})" class="flex-1 sm:flex-none px-4 py-2 bg-rose-50 text-rose-600 hover:bg-rose-100 font-bold rounded-lg border border-rose-200">বাতিল</button>
         </div>
       </div>
     `).join('');
   }
 
-  // 6. Render Manager Meal Force Control Table
-  const managerMealTable = document.getElementById('tableManagerMealControl');
-  if (managerMealTable) {
-    managerMealTable.innerHTML = users.map(u => `
+  const mgrTable = document.getElementById('tableManagerMealControl');
+  if (mgrTable) {
+    mgrTable.innerHTML = users.map(u => `
       <tr class="hover:bg-slate-50">
         <td class="p-3">
           <span class="font-bold text-slate-800">${u.name}</span>
